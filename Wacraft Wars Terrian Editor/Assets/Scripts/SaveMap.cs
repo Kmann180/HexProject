@@ -8,18 +8,24 @@ using System.Xml.Linq;
 using System.IO;
 using System;
 
-
+//tuple????
 
 public class SaveMap : MonoBehaviour
-	
+
 {
 	
-	List<Vector3> Hex_vects = new List<Vector3>();
+	public List<Vector3> Hex_vects = new List<Vector3>();
 	
 	
 	void Update()
 		
 	{
+		if (Input.GetKeyDown (KeyCode.L)) 
+		{
+			XMLtoList();
+		}
+
+
 		if (Input.GetKeyDown (KeyCode.Return)) 
 		{
 			GenXML (GameObject.FindGameObjectsWithTag ("Land"));
@@ -114,8 +120,10 @@ public class SaveMap : MonoBehaviour
 			float y = Convert.ToSingle(node.GetAttribute("y"));
 			
 			float z = Convert.ToSingle(node.GetAttribute("z"));
+
+			string type = node.GetAttribute("Type");
 			
-			Hex_vects.Add (new Vector3(x, y, z));
+			Hex_vects.Add (new Vector3(x, y, z), string type(););
 			
 		}
 		
