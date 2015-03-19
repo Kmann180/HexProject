@@ -13,8 +13,8 @@ using System;
 public class SaveMap : MonoBehaviour
 
 {
-	
-	public List<Vector3> Hex_vects = new List<Vector3>();
+//	Tuple.Create<Vector3,string> HexTuple = new Tuple.Create<Vector3, string>();
+//	public List<Tuple> Hex_vects = new List<HexTuple>();
 	
 	
 	void Update()
@@ -122,8 +122,10 @@ public class SaveMap : MonoBehaviour
 			float z = Convert.ToSingle(node.GetAttribute("z"));
 
 			string type = node.GetAttribute("Type");
-			
-			Hex_vects.Add (new Vector3(x, y, z), string type(););
+
+
+			///////////////TUPLE!!!/////////////////////
+//			Hex_vects.Add (HexTuple(new Vector3(x, y, z), type()));
 			
 		}
 		
@@ -138,14 +140,13 @@ public class SaveMap : MonoBehaviour
 		bool HexThere = false;
 		
 		
-		if (Hex_vects.Contains(PosC))
+/*		if (Hex_vects.Contains(PosC))
 			
 		{
 			
 			HexThere = true;
-		}
-		
-		return HexThere;
-		
+		} */
+			return true;
+
 	}
 }
