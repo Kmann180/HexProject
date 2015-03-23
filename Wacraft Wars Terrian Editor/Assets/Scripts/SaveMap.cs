@@ -63,9 +63,9 @@ public class SaveMap : MonoBehaviour
 			HexStats gridHex = eek.GetComponent<HexStats>();
 			
 			
-			node.SetAttributeValue("x", gridHex.Posx);
-			node.SetAttributeValue("y", gridHex.Posy);
-			node.SetAttributeValue("z", gridHex.PosZ);
+			node.SetAttributeValue("x", gridHex.PosXYZ.x);
+			node.SetAttributeValue("y", gridHex.PosXYZ.y);
+			node.SetAttributeValue("z", gridHex.PosXYZ.z);
 			node.SetAttributeValue("Type", gridHex.Type);
 			
 			XMLelem[i] = node;

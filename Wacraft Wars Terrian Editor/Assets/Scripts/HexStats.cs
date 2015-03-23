@@ -6,37 +6,26 @@ public class HexStats : MonoBehaviour {
 
     public string Type;
 
-	public float Tempx;
-	public float Tempy;
-	public float Tempz;
-	
-	float Snapx;
-	float Snapy;
-	float Snapz;
-	
+	// Grid Distanctes (snap settings)
+	float Snapx = 3;
+	float Snapy = .5f;
+	float Snapz = 1.73f;
+
+	//Grid Position
 	public float Posx;
 	public float Posy;
 	public float PosZ;
 
-	float ZX;
-	float Z;
+	// Grid Vector3
+	public Vector3 PosXYZ;
 
 	void Start()
 	{
-		Tempx = transform.position.x;
-		Tempy = transform.position.y;
-		Tempz = transform.position.z;
-
-		Snapx = EditorPrefs.GetFloat("MoveSnapX");
-		Snapy = EditorPrefs.GetFloat("MoveSnapY");
-		Snapz = EditorPrefs.GetFloat("MoveSnapZ") * 2;
-		
-		Posx = Tempx / Snapx;
-		Posy = Tempy / Snapy;
-
-		ZX = (Posx * (Snapz / 2));
-		Z = Tempz + ZX;
-		PosZ = Mathf.Round(Z / (Snapz));
+		//Grid Maths
+		Posx = transform.position.x / Snapx;
+		Posy = transform.position.y / Snapy;
+		PosZ = Mathf.Round((transform.position.z + ((transform.position.x / Snapx) * (Snapz))) / (Snapz * 2));
+		PosXYZ = new Vector3 (Posx, Posy, PosZ);
 	}
-  
+  	
 }
