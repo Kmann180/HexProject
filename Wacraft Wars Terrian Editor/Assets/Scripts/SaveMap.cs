@@ -1,152 +1,148 @@
 ﻿using UnityEngine;
+using System;
+using System.IO;
+using System.Xml;
+using System.Text;
+using System.Linq;
+using System.Xml.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
-using System.IO;
-using System;
 
 //tuple????
 
 public class SaveMap : MonoBehaviour
 
 {
-//	Tuple.Create<Vector3,string> HexTuple = new Tuple.Create<Vector3, string>();
-//	public List<Tuple> Hex_vects = new List<HexTuple>();
-	
+	public List<NewHex> HexList = new List<NewHex> ();
+
+	void Start()
+	{
+		StartList (GameObject.FindGameObjectsWithTag("Land"));
+
+	}
 	
 	void Update()
 		
 	{
 		if (Input.GetKeyDown (KeyCode.L)) 
 		{
-			XMLtoList();
+			LoadXML();
 		}
 
 
 		if (Input.GetKeyDown (KeyCode.Return)) 
 		{
-			GenXML (GameObject.FindGameObjectsWithTag ("Land"));
+			GenXML();
+			Debug.Log("Saved!");
+		}
+
+	}
+
+	void StartList(GameObject[] Hex)
+	{
+		for (int i = 0; i < Hex.Length; i++) 
+		{
+			GameObject hex = Hex[i];
+			HexStats GridHex = hex.GetComponent<HexStats>();
+
+			HexList.Add(new NewHex(GridHex.PosXYZ, GridHex.WType));
 		}
 	}
-	
-	
-	
-	public XDocument AtlasXML;
-	
-	
-	
-	public void GenXML(GameObject[] hex)
-		
+
+	void AddToList(Vector3 Pos, string Type)
 	{
-		
-		// Declaration
-		
-		XDeclaration XMLdec = new XDeclaration("1.0", "UTF-8", "yes");
-		
-		
-		
-		XElement[] XMLelem = new XElement[hex.Length];
-		
-		
-		
-		for (int i = 0; i < hex.Length; i++)
+		HexList.Add (new NewHex (Pos, Type));
+		Debug.Log (Pos.x);
+		Debug.Log (Pos.y);
+		Debug.Log (Pos.z);
+		Debug.Log (Type);
+	}
+	void RemoveFromList (Vector3 Pos)
+	{
+		Vector3 OneDownPos = Pos - new Vector3 (0,1,0);
+		Vector3 HalfDownPos = Pos - new Vector3 (0,.5f,0);
+
+		for (int i = 0; i < HexList.Count; i++) 
 		{
-			
-			XElement node = new XElement("hex_node");
-			
-			
-			GameObject eek = hex[i];   // cache
-			
-			HexStats gridHex = eek.GetComponent<HexStats>();
-			
-			
-			node.SetAttributeValue("x", gridHex.PosXYZ.x);
-			node.SetAttributeValue("y", gridHex.PosXYZ.y);
-			node.SetAttributeValue("z", gridHex.PosXYZ.z);
-			node.SetAttributeValue("Type", gridHex.Type);
-			
-			XMLelem[i] = node;
-			
+			if (HexList[i].GridPos == OneDownPos)
+			{
+				HexList.RemoveAt(i);
+			}
+			if (HexList[i].GridPos == HalfDownPos)
+			{
+				HexList.RemoveAt(i);
+			}
 		}
+
+	}
+
+	bool CheckList (Vector3 Pos)
+	{
+		Vector3 OneDownPos = Pos - new Vector3 (0,1,0);
+		Vector3 HalfDownPos = Pos - new Vector3 (0,.5f,0);
+		bool IsItTrue = false;
 		
-		
-		
-		XElement XMLRootNode = new XElement("HexAtlus", XMLelem);   // add root
-		
-		XMLRootNode.SetAttributeValue("imagePath", "nothing");
-		
-		
-		XDocument XMLdoc = new XDocument(XMLdec, XMLRootNode);
-		
-		
+		for (int i = 0; i < HexList.Count; i++) 
+		{
+			if (HexList [i].GridPos == OneDownPos) 
+			{
+				IsItTrue = true;
+			} 
+			if (HexList [i].GridPos == HalfDownPos) 
+			{
+				IsItTrue = true;
+			} 
+		}
+		if (IsItTrue == true)
+		{return true;}
+		return false;
+	}
+
+	/////////////////////The Start of XML//////////////////////////
+
+	public XDocument AtlasXML;
+	public void GenXML()
+	{
+		//Declaration
+		XDeclaration XMLdec = new XDeclaration ("1.0", "UTF-8", "yes");
+		XElement[] Xmlelem = new XElement[HexList.Count];
+
+		for (int i = 0; i < HexList.Count; i++)
+		{
+			XElement node = new XElement("Hex_Node");
+
+			node.SetAttributeValue("x", HexList[i].GridPos.x);
+			node.SetAttributeValue("y", HexList[i].GridPos.y);
+			node.SetAttributeValue("z", HexList[i].GridPos.z);
+			node.SetAttributeValue("Type", HexList[i].GType);
+
+			Xmlelem[i] = node;
+		}
+
+		XElement XMLRootNode = new XElement("HexAtlus", Xmlelem); //add root
+		XMLRootNode.SetAttributeValue("imagePath","nothing");
+		XDocument XMLdoc = new XDocument (XMLdec, XMLRootNode);
 		AtlasXML = XMLdoc;
-		
-		//FileStream
-		//xmlstream = new FileStream("H:\\Wacraft's Time Battles\\hexSheet.xml", FileMode.Create);
+
 		
 		AtlasXML.Save("Map1.xml");
-		
-		
 	}
-	
-	////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	
-	public void XMLtoList()
-		
+
+	public void LoadXML()
 	{
-		
-		XmlDocument doc = new XmlDocument();
-		
-		
-		doc.Load("Map1.xml");
-		
-		
-		XmlNodeList nodes = doc.DocumentElement.SelectNodes("hex_node");
-		
-		
-		
-		foreach (XmlElement node in nodes)
-			
+		XmlDocument Doc = new XmlDocument ();
+		Doc.Load("Map1.xml");
+		XmlNodeList nodes = Doc.DocumentElement.SelectNodes("Hex_Node");
+		foreach (XmlElement node in nodes) 
 		{
-			
-			
 			float x = Convert.ToSingle(node.GetAttribute("x"));
-			
 			float y = Convert.ToSingle(node.GetAttribute("y"));
-			
 			float z = Convert.ToSingle(node.GetAttribute("z"));
+			string Type = node.GetAttribute("Type");
 
-			string type = node.GetAttribute("Type");
-
-
-			///////////////TUPLE!!!/////////////////////
-//			Hex_vects.Add (HexTuple(new Vector3(x, y, z), type()));
-			
+			AddToList(new Vector3(x,y,z), Type);
 		}
-		
-	}
-	
-	
-	
-	public bool CheckGrid(Vector3 PosC)
-		
-	{
-		
-		bool HexThere = false;
-		
-		
-/*		if (Hex_vects.Contains(PosC))
-			
-		{
-			
-			HexThere = true;
-		} */
-			return true;
 
 	}
+
 }

@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
+using System;
 
 public class HexStats : MonoBehaviour {
 
-    public string Type;
+    public string WType;
 
 	// Grid Distanctes (snap settings)
 	float Snapx = 3;
@@ -28,4 +29,16 @@ public class HexStats : MonoBehaviour {
 		PosXYZ = new Vector3 (Posx, Posy, PosZ);
 	}
   	
+}
+
+public class NewHex
+{
+	public string GType;
+	public Vector3 GridPos;
+
+	public NewHex (Vector3 NewGridPos, string NewGType)
+	{
+		GType = NewGType;
+		GridPos = NewGridPos;
+	}
 }
