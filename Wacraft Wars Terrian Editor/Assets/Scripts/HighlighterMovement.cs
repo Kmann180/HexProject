@@ -3,13 +3,28 @@ using System.Collections;
 
 public class HighlighterMovement : MonoBehaviour {
 
+	//Scripts
+	SaveMap HexList;
+	public HexStats HexMath;
+
+	//Current Position of highlighter
+	public Vector3 CPos;
+	//New Position of highlighter
+	Vector3 NPos;
+	//Position of the tile under the highlighter
+	Vector3 LPos;
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		Debug.Log (this.transform.position);
+		Debug.Log (HexMath.WorldToGrid (this.transform.position));
+		Debug.Log (HexMath.GridToWorld (HexMath.WorldToGrid (this.transform.position)));
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
+		CPos = this.transform.position;
 		Move ();
 	}
 

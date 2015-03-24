@@ -8,13 +8,13 @@ public class HexStats : MonoBehaviour {
     public string WType;
 
 	// Grid Distanctes (snap settings)
-	float Snapx = 3;
-	float Snapy = .5f;
-	float Snapz = 1.73f;
+	public float SnapX = 3;
+	public float SnapY = .5f;
+	public float SnapZ = 1.73f;
 
 	//Grid Position
-	public float Posx;
-	public float Posy;
+	public float PosX;
+	public float PosY;
 	public float PosZ;
 
 	// Grid Vector3
@@ -23,10 +23,24 @@ public class HexStats : MonoBehaviour {
 	void Start()
 	{
 		//Grid Maths
-		Posx = transform.position.x / Snapx;
-		Posy = transform.position.y / Snapy;
-		PosZ = Mathf.Round((transform.position.z + ((transform.position.x / Snapx) * (Snapz))) / (Snapz * 2));
-		PosXYZ = new Vector3 (Posx, Posy, PosZ);
+		PosX = transform.position.x / SnapX;
+		PosY = transform.position.y;
+		PosZ = Mathf.Round((transform.position.z + ((transform.position.x / SnapX) * (SnapZ))) / (SnapZ * 2));
+		PosXYZ = new Vector3 (PosX, PosY, PosZ);
+	}
+	public Vector3 WorldToGrid(Vector3 WPos)
+	{
+		PosX = WPos.x / SnapX;
+		PosY = WPos.y;
+		PosZ = Mathf.Round((WPos.z + ((WPos.x / SnapX) * (SnapZ))) / (SnapZ * 2));
+		return new Vector3 (PosX, PosY, PosZ);
+	}
+	public Vector3 GridToWorld(Vector3 GPos)
+	{
+		PosX = GPos.x * SnapX;
+		PosY = GPos.y;
+		PosZ = Mathf.Round((GPos.z - ((GPos.x * SnapX) / (SnapZ))) * (SnapZ / 2));
+		return new Vector3 (PosX, PosY, PosZ);
 	}
   	
 }

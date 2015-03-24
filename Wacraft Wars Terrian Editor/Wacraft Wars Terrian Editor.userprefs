@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HexStats.cs">
     <Files>
-      <File FileName="Assets\Scripts\HexStats.cs" Line="16" Column="20" />
-      <File FileName="Assets\Scripts\SaveMap.cs" Line="14" Column="1" />
+      <File FileName="Assets\Scripts\HighlighterMovement.cs" Line="16" Column="32" />
+      <File FileName="Assets\Scripts\HexStats.cs" Line="29" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
