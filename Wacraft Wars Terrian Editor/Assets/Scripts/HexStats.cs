@@ -39,7 +39,7 @@ public class HexStats : MonoBehaviour {
 	{
 		PosX = GPos.x * SnapX;
 		PosY = GPos.y;
-		PosZ = Mathf.Round((GPos.z - ((GPos.x * SnapX) / (SnapZ))) * (SnapZ / 2));
+		PosZ = (GPos.z * (SnapZ * 2)) - (GPos.x * SnapZ);
 		return new Vector3 (PosX, PosY, PosZ);
 	}
   	
