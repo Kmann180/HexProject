@@ -26,14 +26,17 @@ public class SaveMap : MonoBehaviour
 	{
 		if (Input.GetKeyDown (KeyCode.L)) 
 		{
-			LoadXML();
+			LoadXML ();
+			Debug.Log ("Loaded!");
 		}
-
-
 		if (Input.GetKeyDown (KeyCode.Return)) 
 		{
 			GenXML();
 			Debug.Log("Saved!");
+		}
+		if (Input.GetKeyDown (KeyCode.P)) 
+		{
+			Debug.Log(HexList.Count);
 		}
 
 	}
@@ -52,10 +55,6 @@ public class SaveMap : MonoBehaviour
 	void AddToList(Vector3 Pos, string Type)
 	{
 		HexList.Add (new NewHex (Pos, Type));
-		Debug.Log (Pos.x);
-		Debug.Log (Pos.y);
-		Debug.Log (Pos.z);
-		Debug.Log (Type);
 	}
 	void RemoveFromList (Vector3 Pos)
 	{
@@ -130,6 +129,7 @@ public class SaveMap : MonoBehaviour
 
 	public void LoadXML()
 	{
+		HexList.Clear();
 		XmlDocument Doc = new XmlDocument ();
 		Doc.Load("Map1.xml");
 		XmlNodeList nodes = Doc.DocumentElement.SelectNodes("Hex_Node");
