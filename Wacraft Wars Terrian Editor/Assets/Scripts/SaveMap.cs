@@ -56,6 +56,7 @@ public class SaveMap : MonoBehaviour
 	{
 		HexList.Add (new NewHex (Pos, Type));
 	}
+
 	void RemoveFromList (Vector3 Pos)
 	{
 		Vector3 OneDownPos = Pos - new Vector3 (0,1,0);
@@ -75,10 +76,25 @@ public class SaveMap : MonoBehaviour
 
 	}
 
-	bool CheckList (Vector3 Pos)
+	public bool CheckList (Vector3 NewPos)
 	{
-		Vector3 OneDownPos = Pos - new Vector3 (0,1,0);
-		Vector3 HalfDownPos = Pos - new Vector3 (0,.5f,0);
+		//hex that you are moving to
+		Vector3 OneDownPos = NewPos - new Vector3 (0,1,0);
+		Vector3 HalfDownPos = NewPos - new Vector3 (0,.5f,0);
+		//hexes that around the hex that you are moving to !!!ONLY FOR EDITOR!!!
+		Vector3 OneDownPos1 = NewPos - new Vector3 (1,1,1);
+		Vector3 HalfDownPos1 = NewPos - new Vector3 (1,.5f,1);
+		Vector3 OneDownPos2 = NewPos - new Vector3 (1,1,0);
+		Vector3 HalfDownPos2 = NewPos - new Vector3 (1,.5f,0);
+		Vector3 OneDownPos3 = NewPos - new Vector3 (0,1,-1);
+		Vector3 HalfDownPos3 = NewPos - new Vector3 (0,.5f,-1);
+		Vector3 OneDownPos4 = NewPos - new Vector3 (-1,1,-1);
+		Vector3 HalfDownPos4 = NewPos - new Vector3 (-1,.5f,-1);
+		Vector3 OneDownPos5 = NewPos - new Vector3 (-1,1,0);
+		Vector3 HalfDownPos5 = NewPos - new Vector3 (-1,.5f,0);
+		Vector3 OneDownPos6 = NewPos - new Vector3 (0,1,1);
+		Vector3 HalfDownPos6 = NewPos - new Vector3 (0,.5f,1);
+
 		bool IsItTrue = false;
 		
 		for (int i = 0; i < HexList.Count; i++) 
@@ -86,10 +102,72 @@ public class SaveMap : MonoBehaviour
 			if (HexList [i].GridPos == OneDownPos) 
 			{
 				IsItTrue = true;
+				Debug.Log (IsItTrue);
 			} 
 			if (HexList [i].GridPos == HalfDownPos) 
 			{
 				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			}
+			/////////////////////////////////////// !!!FOR EDITOR ONLY!!!
+			if (HexList [i].GridPos == OneDownPos1) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			} 
+			if (HexList [i].GridPos == HalfDownPos1) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			} 
+			if (HexList [i].GridPos == OneDownPos2) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			} 
+			if (HexList [i].GridPos == HalfDownPos2) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			} 
+			if (HexList [i].GridPos == OneDownPos3) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			} 
+			if (HexList [i].GridPos == HalfDownPos3) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			} 
+			if (HexList [i].GridPos == OneDownPos4) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			} 
+			if (HexList [i].GridPos == HalfDownPos4) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			} 
+			if (HexList [i].GridPos == OneDownPos5) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			} 
+			if (HexList [i].GridPos == HalfDownPos5) 
+			{
+				IsItTrue = true;
+			} 
+			if (HexList [i].GridPos == OneDownPos6) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
+			} 
+			if (HexList [i].GridPos == HalfDownPos6) 
+			{
+				IsItTrue = true;
+				Debug.Log (IsItTrue);
 			} 
 		}
 		if (IsItTrue == true)
