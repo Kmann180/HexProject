@@ -45,10 +45,12 @@ public class HexStats : MonoBehaviour {
   	
 }
 
+/*
 public class NewHex
 {
 	public string GType;
 	public Vector3 GridPos;
+	public HexStats stats;
 
 	public NewHex (Vector3 NewGridPos, string NewGType)
 	{
@@ -56,3 +58,4 @@ public class NewHex
 		GridPos = NewGridPos;
 	}
 }
+*/

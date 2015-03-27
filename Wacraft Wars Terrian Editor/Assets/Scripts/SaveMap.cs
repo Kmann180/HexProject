@@ -13,7 +13,9 @@ using System.Collections.Generic;
 public class SaveMap : MonoBehaviour
 
 {
-	public List<NewHex> HexList = new List<NewHex> ();
+	//public List<NewHex> HexList = new List<NewHex> ();
+	public List<HexStats> HexList = new List<HexStats> ();
+	public GameObject HexPrefab;
 
 	void Start()
 	{
@@ -48,13 +50,20 @@ public class SaveMap : MonoBehaviour
 			GameObject hex = Hex[i];
 			HexStats GridHex = hex.GetComponent<HexStats>();
 
-			HexList.Add(new NewHex(GridHex.PosXYZ, GridHex.WType));
+			HexList.Add(GridHex);
 		}
 	}
 
-	public void AddToList(Vector3 Pos, string Type)
+	public void AddToList(Vector3 Vec3, string Type)
 	{
-		HexList.Add (new NewHex (Pos, Type));
+		HexStats Hex = (Instantiate(HexPrefab, Vec3, Quaternion.identity) as GameObject).GetComponent<HexStats>();
+		Hex.PosX = Vec3.x;
+		Hex.PosY = Vec3.y;
+		Hex.PosZ = Vec3.z;
+		Hex.PosXYZ = Vec3;
+		Hex.WType = Type;
+
+		HexList.Add (Hex);
 	}
 
 	public void RemoveFromList (Vector3 Pos)
@@ -64,11 +73,11 @@ public class SaveMap : MonoBehaviour
 
 		for (int i = 0; i < HexList.Count; i++) 
 		{
-			if (HexList[i].GridPos == OneDownPos)
+			if (HexList[i].PosXYZ == OneDownPos)
 			{
 				HexList.RemoveAt(i);
 			}
-			if (HexList[i].GridPos == HalfDownPos)
+			if (HexList[i].PosXYZ == HalfDownPos)
 			{
 				HexList.RemoveAt(i);
 			}
@@ -99,60 +108,60 @@ public class SaveMap : MonoBehaviour
 		
 		for (int i = 0; i < HexList.Count; i++) 
 		{
-			if (HexList [i].GridPos == OneDownPos) 
+			if (HexList [i].PosXYZ == OneDownPos) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == HalfDownPos) 
+			if (HexList [i].PosXYZ == HalfDownPos) 
 			{
 				IsItTrue = true;
 			}
 			/////////////////////////////////////// !!!FOR EDITOR ONLY!!!
-			if (HexList [i].GridPos == OneDownPos1) 
+			if (HexList [i].PosXYZ == OneDownPos1) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == HalfDownPos1) 
+			if (HexList [i].PosXYZ == HalfDownPos1) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == OneDownPos2) 
+			if (HexList [i].PosXYZ == OneDownPos2) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == HalfDownPos2) 
+			if (HexList [i].PosXYZ == HalfDownPos2) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == OneDownPos3) 
+			if (HexList [i].PosXYZ == OneDownPos3) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == HalfDownPos3) 
+			if (HexList [i].PosXYZ == HalfDownPos3) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == OneDownPos4) 
+			if (HexList [i].PosXYZ == OneDownPos4) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == HalfDownPos4) 
+			if (HexList [i].PosXYZ == HalfDownPos4) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == OneDownPos5) 
+			if (HexList [i].PosXYZ == OneDownPos5) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == HalfDownPos5) 
+			if (HexList [i].PosXYZ == HalfDownPos5) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == OneDownPos6) 
+			if (HexList [i].PosXYZ == OneDownPos6) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == HalfDownPos6) 
+			if (HexList [i].PosXYZ == HalfDownPos6) 
 			{
 				IsItTrue = true;
 			} 
@@ -171,11 +180,11 @@ public class SaveMap : MonoBehaviour
 		bool IsItTrue = false;
 		for (int i = 0; i < HexList.Count; i++) 
 		{
-			if (HexList [i].GridPos == OneDownPos) 
+			if (HexList [i].PosXYZ == OneDownPos) 
 			{
 				IsItTrue = true;
 			} 
-			if (HexList [i].GridPos == HalfDownPos) 
+			if (HexList [i].PosXYZ == HalfDownPos) 
 			{
 				IsItTrue = true;
 			} 
@@ -189,6 +198,7 @@ public class SaveMap : MonoBehaviour
 	/////////////////////The Start of XML//////////////////////////
 
 	public XDocument AtlasXML;
+
 	public void GenXML()
 	{
 		//Declaration
@@ -199,10 +209,10 @@ public class SaveMap : MonoBehaviour
 		{
 			XElement node = new XElement("Hex_Node");
 
-			node.SetAttributeValue("x", HexList[i].GridPos.x);
-			node.SetAttributeValue("y", HexList[i].GridPos.y);
-			node.SetAttributeValue("z", HexList[i].GridPos.z);
-			node.SetAttributeValue("Type", HexList[i].GType);
+			node.SetAttributeValue("x", HexList[i].PosXYZ.x);
+			node.SetAttributeValue("y", HexList[i].PosXYZ.y);
+			node.SetAttributeValue("z", HexList[i].PosXYZ.z);
+			node.SetAttributeValue("Type", HexList[i].WType);
 
 			Xmlelem[i] = node;
 		}
@@ -219,6 +229,8 @@ public class SaveMap : MonoBehaviour
 	public void LoadXML()
 	{
 		HexList.Clear();
+		DestroyAllObjects();
+
 		XmlDocument Doc = new XmlDocument ();
 		Doc.Load("Map1.xml");
 		XmlNodeList nodes = Doc.DocumentElement.SelectNodes("Hex_Node");
@@ -229,9 +241,27 @@ public class SaveMap : MonoBehaviour
 			float z = Convert.ToSingle(node.GetAttribute("z"));
 			string Type = node.GetAttribute("Type");
 
-			AddToList(new Vector3(x,y,z), Type);
+			AddToList(GridToWorld(new Vector3(x,y,z)), Type);
 		}
 
+	}
+
+	public Vector3 GridToWorld(Vector3 GPos)
+	{
+		float PosX = GPos.x * 3;
+		float PosY = GPos.y;
+		float PosZ = (GPos.z * (1.73f * 2)) - (GPos.x * 1.73f);
+		return new Vector3 (PosX, PosY, PosZ);
+	}
+
+	void DestroyAllObjects()
+	{
+		var gameObjects = GameObject.FindGameObjectsWithTag ("Land");
+		
+		for(var i = 0 ; i < gameObjects.Length ; i ++)
+		{
+			Destroy(gameObjects[i]);
+		}
 	}
 
 }

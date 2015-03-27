@@ -25,8 +25,9 @@ public class CreateNewHex : MonoBehaviour
 		{
 			if (HexList.CheckListPlace(HexMath.WorldToGrid(CPos)) == false)
 			{
-				Instantiate(Lava, (CPos - new Vector3 (0,1,0)), new Quaternion(0,0,0,0));
-				HexList.AddToList((CPos - new Vector3 (0,1,0)), "Lava");
+				var stats = ((Instantiate(Lava, (CPos - new Vector3 (0,1,0)), new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+				HexList.HexList.Add(stats);
+
 				if (HexList.CheckListPlace(HexMath.WorldToGrid(CPos - new Vector3 (0,1,0))))
 				{
 					Debug.Log("Done");
