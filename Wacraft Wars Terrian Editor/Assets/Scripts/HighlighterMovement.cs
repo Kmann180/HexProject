@@ -16,9 +16,6 @@ public class HighlighterMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		Debug.Log (this.transform.position);
-		Debug.Log (HexMath.WorldToGrid (this.transform.position));
-		Debug.Log (HexMath.GridToWorld (HexMath.WorldToGrid (this.transform.position)));
 	}
 	
 	// Update is called once per frame
@@ -32,42 +29,42 @@ public class HighlighterMovement : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (KeyCode.A)) 
 		{
-			if (HexList.CheckList(HexMath.WorldToGrid(CPos + new Vector3(-3,0,-1.73f))))
+			if (HexList.CheckListMove(HexMath.WorldToGrid(CPos + new Vector3(-3,0,-1.73f))))
 			{
 			transform.Translate(new Vector3(-3,0,-1.73f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Q)) 
 		{
-			if (HexList.CheckList(HexMath.WorldToGrid(CPos + new Vector3(-3,0,1.73f))))
+			if (HexList.CheckListMove(HexMath.WorldToGrid(CPos + new Vector3(-3,0,1.73f))))
 			{
 			transform.Translate(new Vector3(-3,0,1.73f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.W)) 
 		{
-			if (HexList.CheckList(HexMath.WorldToGrid(CPos + new Vector3(0,0,3.46f))))
+			if (HexList.CheckListMove(HexMath.WorldToGrid(CPos + new Vector3(0,0,3.46f))))
 			{
 				transform.Translate(new Vector3(0,0,3.46f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.E)) 
 		{
-			if (HexList.CheckList(HexMath.WorldToGrid(CPos + new Vector3(3,0,1.73f))))
+			if (HexList.CheckListMove(HexMath.WorldToGrid(CPos + new Vector3(3,0,1.73f))))
 			{
 				transform.Translate(new Vector3(3,0,1.73f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.D)) 
 		{
-			if (HexList.CheckList(HexMath.WorldToGrid(CPos + new Vector3(3,0,-1.73f))))
+			if (HexList.CheckListMove(HexMath.WorldToGrid(CPos + new Vector3(3,0,-1.73f))))
 			{
 				transform.Translate(new Vector3(3,0,-1.73f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.S)) 
 		{
-			if (HexList.CheckList(HexMath.WorldToGrid(CPos + new Vector3(0,0,-3.46f))))
+			if (HexList.CheckListMove(HexMath.WorldToGrid(CPos + new Vector3(0,0,-3.46f))))
 			{
 				transform.Translate(new Vector3(0,0,-3.46f), Space.Self);
 			}
