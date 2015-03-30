@@ -23,16 +23,14 @@ public class CreateNewHex : MonoBehaviour
 		CPos = this.transform.position;
 		if (Input.GetKeyDown (KeyCode.Keypad1)) 
 		{
-			if (HexList.CheckListPlace(HexMath.WorldToGrid(CPos)) == false)
-			{
-				var stats = ((Instantiate(Lava, (CPos - new Vector3 (0,1,0)), new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
-				HexList.HexList.Add(stats);
+			var stats = ((Instantiate(Lava, (CPos - new Vector3 (0,1,0)), new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+			HexList.HexList.Add(stats);
 
-				if (HexList.CheckListPlace(HexMath.WorldToGrid(CPos - new Vector3 (0,1,0))))
-				{
-					Debug.Log("Done");
-				}
+			if (HexList.CheckListBelow(HexMath.WorldToGrid(CPos - new Vector3 (0,1,0))))
+			{
+				Debug.Log("Done");
 			}
+	
 		}
 	}
 

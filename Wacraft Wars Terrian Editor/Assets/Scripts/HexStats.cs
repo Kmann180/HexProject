@@ -23,21 +23,21 @@ public class HexStats : MonoBehaviour {
 	void Start()
 	{
 		//Grid Maths
-		PosX = transform.position.x / SnapX;
+		PosX = Mathf.RoundToInt((transform.position.x / SnapX));
 		PosY = transform.position.y;
 		PosZ = Mathf.Round((transform.position.z + ((transform.position.x / SnapX) * (SnapZ))) / (SnapZ * 2));
 		PosXYZ = new Vector3 (PosX, PosY, PosZ);
 	}
 	public Vector3 WorldToGrid(Vector3 WPos)
 	{
-		PosX = WPos.x / SnapX;
+		PosX = Mathf.RoundToInt(WPos.x / SnapX);
 		PosY = WPos.y;
 		PosZ = Mathf.Round((WPos.z + ((WPos.x / SnapX) * (SnapZ))) / (SnapZ * 2));
 		return new Vector3 (PosX, PosY, PosZ);
 	}
 	public Vector3 GridToWorld(Vector3 GPos)
 	{
-		PosX = GPos.x * SnapX;
+		PosX = Mathf.RoundToInt(GPos.x * SnapX);
 		PosY = GPos.y;
 		PosZ = (GPos.z * (SnapZ * 2)) - (GPos.x * SnapZ);
 		return new Vector3 (PosX, PosY, PosZ);
