@@ -125,7 +125,7 @@ public class SaveMap : MonoBehaviour
 			if (HexList [i].PosXYZ == HalfDownPos) 
 			{
 				IsItTrue = true;
-			}
+			};
 		}
 		if (IsItTrue == true)
 		{return true;}

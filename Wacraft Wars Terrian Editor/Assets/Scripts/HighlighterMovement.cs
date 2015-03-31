@@ -29,74 +29,134 @@ public class HighlighterMovement : MonoBehaviour {
 	{
 		if (Input.GetKeyDown (KeyCode.A)) 
 		{
-			if (HexList.CheckListAround(HexMath.WorldToGrid(CPos + new Vector3(-3,0,-1.73f))))
+			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(-3,0,-1.73f))))
 			{
-			transform.Translate(new Vector3(-3,0,-1.73f), Space.World);
+				transform.Translate(new Vector3(-3,MoveCheckFloat(CPos + new Vector3(-3,0,-1.73f)),-1.73f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Q)) 
 		{
-			if (HexList.CheckListAround(HexMath.WorldToGrid(CPos + new Vector3(-3,0,1.73f))))
+			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(-3,0,1.73f))))
 			{
-			transform.Translate(new Vector3(-3,0,1.73f), Space.World);
+				transform.Translate(new Vector3(-3,MoveCheckFloat(CPos + new Vector3(-3,0,1.73f)),1.73f) , Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.W)) 
 		{
-			if (HexList.CheckListAround(HexMath.WorldToGrid(CPos + new Vector3(0,0,3.46f))))
+			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(0,0,3.46f))))
 			{
-				transform.Translate(new Vector3(0,0,3.46f), Space.World);
+				transform.Translate(new Vector3(0,MoveCheckFloat(CPos + new Vector3(0,0,3.46f)),3.46f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.E)) 
 		{
-			if (HexList.CheckListAround(HexMath.WorldToGrid(CPos + new Vector3(3,0,1.73f))))
+			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(3,0,1.73f))))
 			{
-				transform.Translate(new Vector3(3,0,1.73f), Space.World);
+				transform.Translate(new Vector3(3,MoveCheckFloat(CPos + new Vector3(3,0,1.73f)),1.73f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.D)) 
 		{
-			if (HexList.CheckListAround(HexMath.WorldToGrid(CPos + new Vector3(3,0,-1.73f))))
+			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(3,0,-1.73f))))
 			{
-				transform.Translate(new Vector3(3,0,-1.73f), Space.World);
+				transform.Translate(new Vector3(3,MoveCheckFloat(CPos + new Vector3(3,0,-1.73f)),-1.73f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.S)) 
 		{
-			if (HexList.CheckListAround(HexMath.WorldToGrid(CPos + new Vector3(0,0,-3.46f))))
+			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(0,0,-3.46f))))
 			{
-				transform.Translate(new Vector3(0,0,-3.46f), Space.World);
+				transform.Translate(new Vector3(0,MoveCheckFloat(CPos + new Vector3(0,0,-3.46f)),-3.46f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.R)) 
 		{
-				transform.Rotate(0,60,0, Space.World);
+				transform.Rotate(0,60,0, Space.Self);
 		}
 		if (Input.GetKeyDown (KeyCode.Tab)) 
 		{
-				transform.Rotate(0,-60,0, Space.World);
+				transform.Rotate(0,-60,0, Space.Self);
 		}
 
 
 	}
 
-	int MoveCheck(Vector3 NPos)
+	float MoveCheckFloat(Vector3 NPos)
 	{
-		if (HexList.CheckListAround (NPos)) 
+		Debug.Log ("Initially");
+		Debug.Log (NPos);
+		int i = 0;
+		while (HexList.CheckListIn (NPos)) 
 		{
-			return 1;
+			Debug.Log ("In Something");
+			Debug.Log (NPos);
+			NPos = NPos + new Vector3 (0,1,0);
+			Debug.Log (NPos);
+		}
+		Debug.Log ("Not In Something");
+		while (!HexList.CheckListBelow(NPos)) 
+		{
+			Debug.Log ("Nothing Below");
+			if (HexList.CheckListAround (NPos)) 
+			{
+				Debug.Log ("Something Around");
+				Debug.Log (NPos);
+				break;
+			}
+			Debug.Log ("Nothing Around");
+			if (NPos.y == 0) 
+			{
+				Debug.Log ("NPos.y == 0");
+				Debug.Log (NPos);
+				NPos = NPos + new Vector3 (0, i, 0);
+				Debug.Log (NPos);
+				break;
+			}
+			
+			Debug.Log ("NPos.y != 0");
+			Debug.Log (NPos);
+			NPos = NPos + new Vector3 (0, -1, 0);
+			i++;
+			Debug.Log (NPos);
+			Debug.Log (i);
+		}
+		Debug.Log ("Returning");
+		Debug.Log (NPos);
+
+		return NPos.y;
+	}
+
+	bool MoveCheckBool(Vector3 NPos)
+	{
+		int i = 0;
+		while (HexList.CheckListIn (NPos)) 
+		{
+			return true;
+		}
+		
+		while (!HexList.CheckListBelow(NPos)) 
+		{
+			
+			if (HexList.CheckListAround (NPos)) 
+			{
+				return true;
+			}
+			
+			if (NPos.y == 0) 
+			{
+				NPos = NPos + new Vector3 (0, i, 0);
+				break;
+			}
+			
+			NPos = NPos + new Vector3 (0, -1, 0);
+			i++;
 		}
 		if (HexList.CheckListBelow (NPos)) 
 		{
-			return 1;
+			return true;
 		}
-		if (HexList.CheckListIn (NPos)) 
-		{
-			return 2;
-		}
-
-		return 0;
+		
+		return false;
 	}
 
 }
