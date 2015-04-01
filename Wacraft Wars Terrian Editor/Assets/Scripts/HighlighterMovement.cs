@@ -83,47 +83,25 @@ public class HighlighterMovement : MonoBehaviour {
 
 	float MoveCheckFloat(Vector3 NPos)
 	{
-		Debug.Log ("Initially");
-		Debug.Log (NPos);
-		int i = 0;
+		float i = NPos.y;
 		while (HexList.CheckListIn (NPos)) 
 		{
-			Debug.Log ("In Something");
-			Debug.Log (NPos);
 			NPos = NPos + new Vector3 (0,1,0);
-			Debug.Log (NPos);
 		}
-		Debug.Log ("Not In Something");
 		while (!HexList.CheckListBelow(NPos)) 
 		{
-			Debug.Log ("Nothing Below");
 			if (HexList.CheckListAround (NPos)) 
 			{
-				Debug.Log ("Something Around");
-				Debug.Log (NPos);
 				break;
 			}
-			Debug.Log ("Nothing Around");
 			if (NPos.y == 0) 
 			{
-				Debug.Log ("NPos.y == 0");
-				Debug.Log (NPos);
 				NPos = NPos + new Vector3 (0, i, 0);
-				Debug.Log (NPos);
 				break;
 			}
-			
-			Debug.Log ("NPos.y != 0");
-			Debug.Log (NPos);
 			NPos = NPos + new Vector3 (0, -1, 0);
-			i++;
-			Debug.Log (NPos);
-			Debug.Log (i);
 		}
-		Debug.Log ("Returning");
-		Debug.Log (NPos);
-
-		return NPos.y;
+		return i;
 	}
 
 	bool MoveCheckBool(Vector3 NPos)
