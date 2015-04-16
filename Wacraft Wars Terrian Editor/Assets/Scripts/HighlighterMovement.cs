@@ -31,42 +31,50 @@ public class HighlighterMovement : MonoBehaviour {
 		{
 			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(-3,0,-1.73f))))
 			{
-				transform.Translate(new Vector3(-3,MoveCheckFloat(CPos + new Vector3(-3,0,-1.73f)),-1.73f), Space.Self);
+				transform.Translate(new Vector3(-3,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(-3,0,-1.73f))),-1.73f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.Q)) 
 		{
 			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(-3,0,1.73f))))
 			{
-				transform.Translate(new Vector3(-3,MoveCheckFloat(CPos + new Vector3(-3,0,1.73f)),1.73f) , Space.Self);
+				transform.Translate(new Vector3(-3,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(-3,0,1.73f))),1.73f) , Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.W)) 
 		{
 			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(0,0,3.46f))))
 			{
-				transform.Translate(new Vector3(0,MoveCheckFloat(CPos + new Vector3(0,0,3.46f)),3.46f), Space.Self);
+				transform.Translate(new Vector3(0,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(0,0,3.46f))),3.46f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.E)) 
 		{
 			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(3,0,1.73f))))
 			{
-				transform.Translate(new Vector3(3,MoveCheckFloat(CPos + new Vector3(3,0,1.73f)),1.73f), Space.Self);
+				transform.Translate(new Vector3(3,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(3,0,1.73f))),1.73f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.D)) 
 		{
 			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(3,0,-1.73f))))
 			{
-				transform.Translate(new Vector3(3,MoveCheckFloat(CPos + new Vector3(3,0,-1.73f)),-1.73f), Space.Self);
+				transform.Translate(new Vector3(3,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(3,0,-1.73f))),-1.73f), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.S)) 
 		{
 			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(0,0,-3.46f))))
 			{
-				transform.Translate(new Vector3(0,MoveCheckFloat(CPos + new Vector3(0,0,-3.46f)),-3.46f), Space.Self);
+				transform.Translate(new Vector3(0,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(0,0,-3.46f))),-3.46f), Space.Self);
+			}
+		}
+		if (Input.GetKeyDown (KeyCode.Space)) 
+		{
+			if (MoveCheckBool(HexMath.WorldToGrid(CPos)))
+			{
+				Debug.Log("gets here");
+				transform.Translate(new Vector3(0,MoveDown(HexMath.WorldToGrid(CPos - new Vector3(0,1,0))),0), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.R)) 
@@ -77,8 +85,37 @@ public class HighlighterMovement : MonoBehaviour {
 		{
 				transform.Rotate(0,-60,0, Space.Self);
 		}
+	}
 
-
+	float MoveDown(Vector3 NPos)
+	{
+		Debug.Log ("getshere");
+		float i = NPos.y;
+		while (HexList.CheckListIn (NPos)) 
+		{
+			
+			Debug.Log("shit");
+			NPos.y++;
+		}
+		while (!HexList.CheckListBelow(NPos)) 
+		{
+			
+			Debug.Log ("getsheretoo");
+			if (HexList.CheckListAround (NPos)) 
+			{
+				
+				Debug.Log ("getsherearound");
+				break;
+			}
+			if (NPos.y == 0) 
+			{
+				
+				Debug.Log ("getshereNone");
+				break;
+			}
+			NPos.y--;
+		}
+		return NPos.y - i;
 	}
 
 	float MoveCheckFloat(Vector3 NPos)
@@ -86,7 +123,7 @@ public class HighlighterMovement : MonoBehaviour {
 		float i = NPos.y;
 		while (HexList.CheckListIn (NPos)) 
 		{
-			NPos = NPos + new Vector3 (0,1,0);
+			NPos.y++;
 		}
 		while (!HexList.CheckListBelow(NPos)) 
 		{
@@ -96,12 +133,11 @@ public class HighlighterMovement : MonoBehaviour {
 			}
 			if (NPos.y == 0) 
 			{
-				NPos = NPos + new Vector3 (0, i, 0);
 				break;
 			}
-			NPos = NPos + new Vector3 (0, -1, 0);
+			NPos.y--;
 		}
-		return i;
+		return NPos.y - i;
 	}
 
 	bool MoveCheckBool(Vector3 NPos)

@@ -23,7 +23,7 @@ public class CreateNewHex : MonoBehaviour
 		CPos = this.transform.position;
 		if (Input.GetKeyDown (KeyCode.Keypad1)) 
 		{
-			var stats = ((Instantiate(Lava, (CPos - new Vector3 (0,1,0)), new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+			var stats = ((Instantiate(Lava, CPos, new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
 			HexList.HexList.Add(stats);
 
 			if (HexList.CheckListBelow(HexMath.WorldToGrid(CPos - new Vector3 (0,1,0))))

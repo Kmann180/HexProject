@@ -87,7 +87,7 @@ public class SaveMap : MonoBehaviour
 	public bool CheckListIn (Vector3 NewPos)
 	{
 		//hex that you are moving to
-		Vector3 OneDownPos = NewPos - new Vector3 (0,1,0);
+		Vector3 OneDownPos = NewPos;
 		Vector3 HalfDownPos = NewPos - new Vector3 (0,.5f,0); 							///Change///
 		
 		bool IsItTrue = false;
@@ -118,13 +118,15 @@ public class SaveMap : MonoBehaviour
 		
 		for (int i = 0; i < HexList.Count; i++) 
 		{
-			if (HexList [i].PosXYZ == OneDownPos) 
+			if (HexList[i].PosXYZ == OneDownPos) 
 			{
 				IsItTrue = true;
+				break;
 			} 
 			if (HexList [i].PosXYZ == HalfDownPos) 
 			{
 				IsItTrue = true;
+				break;
 			};
 		}
 		if (IsItTrue == true)
@@ -135,17 +137,17 @@ public class SaveMap : MonoBehaviour
 	public bool CheckListAround (Vector3 NewPos)
 	{
 		//hexes that around the hex that you are moving to !!!ONLY FOR EDITOR!!!
-		Vector3 OneDownPos1 = NewPos - new Vector3 (1,1,1);
+		Vector3 OneDownPos1 = NewPos - new Vector3 (1,0,1);
 		Vector3 HalfDownPos1 = NewPos - new Vector3 (1,.5f,1); 							///Change///
-		Vector3 OneDownPos2 = NewPos - new Vector3 (1,1,0);
+		Vector3 OneDownPos2 = NewPos - new Vector3 (1,0,0);
 		Vector3 HalfDownPos2 = NewPos - new Vector3 (1,.5f,0); 							///Change///
-		Vector3 OneDownPos3 = NewPos - new Vector3 (0,1,-1);
+		Vector3 OneDownPos3 = NewPos - new Vector3 (0,0,-1);
 		Vector3 HalfDownPos3 = NewPos - new Vector3 (0,.5f,-1); 						///Change///
-		Vector3 OneDownPos4 = NewPos - new Vector3 (-1,1,-1);
+		Vector3 OneDownPos4 = NewPos - new Vector3 (-1,0,-1);
 		Vector3 HalfDownPos4 = NewPos - new Vector3 (-1,.5f,-1); 						///Change///
-		Vector3 OneDownPos5 = NewPos - new Vector3 (-1,1,0);
+		Vector3 OneDownPos5 = NewPos - new Vector3 (-1,0,0);
 		Vector3 HalfDownPos5 = NewPos - new Vector3 (-1,.5f,0); 						///Change///
-		Vector3 OneDownPos6 = NewPos - new Vector3 (0,1,1);
+		Vector3 OneDownPos6 = NewPos - new Vector3 (0,0,1);
 		Vector3 HalfDownPos6 = NewPos - new Vector3 (0,.5f,1); 							///Change///
 		
 		bool IsItTrue = false;
