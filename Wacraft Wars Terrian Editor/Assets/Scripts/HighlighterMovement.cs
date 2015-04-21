@@ -73,8 +73,7 @@ public class HighlighterMovement : MonoBehaviour {
 		{
 			if (MoveCheckBool(HexMath.WorldToGrid(CPos)))
 			{
-				Debug.Log("gets here");
-				transform.Translate(new Vector3(0,MoveDown(HexMath.WorldToGrid(CPos - new Vector3(0,1,0))),0), Space.Self);
+				transform.Translate(new Vector3(0,MoveDown(HexMath.WorldToGrid(CPos)),0), Space.Self);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.R)) 
@@ -89,31 +88,23 @@ public class HighlighterMovement : MonoBehaviour {
 
 	float MoveDown(Vector3 NPos)
 	{
-		Debug.Log ("getshere");
 		float i = NPos.y;
 		while (HexList.CheckListIn (NPos)) 
 		{
-			
-			Debug.Log("shit");
 			NPos.y++;
 		}
 		while (!HexList.CheckListBelow(NPos)) 
 		{
-			
-			Debug.Log ("getsheretoo");
+			NPos.y--;
+
 			if (HexList.CheckListAround (NPos)) 
 			{
-				
-				Debug.Log ("getsherearound");
 				break;
 			}
 			if (NPos.y == 0) 
 			{
-				
-				Debug.Log ("getshereNone");
 				break;
 			}
-			NPos.y--;
 		}
 		return NPos.y - i;
 	}

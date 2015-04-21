@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.IO;
 using System.Xml;
@@ -13,9 +13,9 @@ using System.Collections.Generic;
 public class SaveMap : MonoBehaviour
 
 {
-	//public List<NewHex> HexList = new List<NewHex> ();
 	public List<HexStats> HexList = new List<HexStats> ();
-	public GameObject HexPrefab;
+
+	public HexTypeManager HexType;
 
 	void Start()
 	{
@@ -56,7 +56,7 @@ public class SaveMap : MonoBehaviour
 
 	public void AddToList(Vector3 Vec3, string Type)
 	{
-		HexStats Hex = (Instantiate(HexPrefab, Vec3, Quaternion.identity) as GameObject).GetComponent<HexStats>();
+		HexStats Hex = (Instantiate(HexType.PickType(Type), Vec3, Quaternion.identity) as GameObject).GetComponent<HexStats>();
 		Hex.PosX = Vec3.x;
 		Hex.PosY = Vec3.y;
 		Hex.PosZ = Vec3.z;
@@ -233,7 +233,7 @@ public class SaveMap : MonoBehaviour
 		return false;
 	}
 
-	/////////////////////The Start of XML//////////////////////////
+	/////////////////////The Start of XML////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public XDocument AtlasXML;
 

@@ -3,11 +3,10 @@ using System.Collections;
 
 public class CreateNewHex : MonoBehaviour 
 {
-
+	
 	public SaveMap HexList;
 	public HexStats HexMath;
-
-	public GameObject Lava;
+	public HexTypeManager HexType;
 
 	Vector3 CPos;
 
@@ -23,16 +22,16 @@ public class CreateNewHex : MonoBehaviour
 		CPos = this.transform.position;
 		if (Input.GetKeyDown (KeyCode.Keypad1)) 
 		{
-			var stats = ((Instantiate(Lava, CPos, new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+			var stats = ((Instantiate(HexType.PickType("Lava"), CPos, new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
 			HexList.HexList.Add(stats);
+			transform.Translate(new Vector3(0,1,0), Space.Self);
+		}
 
-			if (HexList.CheckListBelow(HexMath.WorldToGrid(CPos - new Vector3 (0,1,0))))
-			{
-				Debug.Log("Done");
-			}
-	
+		if (Input.GetKeyDown (KeyCode.Keypad2)) 
+		{
+			var stats = ((Instantiate(HexType.PickType("Water"), CPos, new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+			HexList.HexList.Add(stats);
+			transform.Translate(new Vector3(0,1,0), Space.Self);
 		}
 	}
-
-
 }

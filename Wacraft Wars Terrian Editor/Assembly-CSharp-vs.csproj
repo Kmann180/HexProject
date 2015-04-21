@@ -51,6 +51,7 @@
      <Compile Include="Assets\ProCore\ProBuilder\API Examples\Runtime Editing\RuntimeEdit.cs" />
      <Compile Include="Assets\Scripts\CreateNewHex.cs" />
      <Compile Include="Assets\Scripts\HexStats.cs" />
+     <Compile Include="Assets\Scripts\HexTypeManager.cs" />
      <Compile Include="Assets\Scripts\HighlighterMovement.cs" />
      <Compile Include="Assets\Scripts\SaveMap.cs" />
      <None Include="Assets\ProCore\ProBuilder\About\changelog.txt" />
