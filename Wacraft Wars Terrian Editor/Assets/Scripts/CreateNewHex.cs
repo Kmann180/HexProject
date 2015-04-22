@@ -4,7 +4,7 @@ using System.Collections;
 public class CreateNewHex : MonoBehaviour 
 {
 	
-	public SaveMap HexList;
+	public ListManager HexList;
 	public HexStats HexMath;
 	public HexTypeManager HexType;
 

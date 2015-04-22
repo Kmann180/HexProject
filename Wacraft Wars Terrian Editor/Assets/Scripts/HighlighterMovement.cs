@@ -4,7 +4,7 @@ using System.Collections;
 public class HighlighterMovement : MonoBehaviour {
 
 	//Scripts
-	public SaveMap HexList;
+	public ListManager HexList;
 	public HexStats HexMath;
 
 	//Current Position of highlighter

@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\HexStats.cs" />
      <Compile Include="Assets\Scripts\HexTypeManager.cs" />
      <Compile Include="Assets\Scripts\HighlighterMovement.cs" />
+     <Compile Include="Assets\Scripts\ListManager.cs" />
      <Compile Include="Assets\Scripts\SaveMap.cs" />
      <None Include="Assets\ProCore\ProBuilder\About\changelog.txt" />
      <None Include="Assets\ProCore\ProBuilder\Shader\DiffuseVertexColor.shader" />
