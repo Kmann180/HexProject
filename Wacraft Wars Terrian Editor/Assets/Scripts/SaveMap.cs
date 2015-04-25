@@ -32,9 +32,9 @@ public class SaveMap : MonoBehaviour
 			GenXML();
 			Debug.Log("Saved!");
 		}
-	}s
+	}
 
-	public XDocument AtlasXML;
+		public System.Xml.Linq.XDocument AtlasXML;
 
 	public void GenXML()
 	{
