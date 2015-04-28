@@ -30,8 +30,10 @@ public class HexTypeManager : MonoBehaviour
 		switch (Type) 
 		{
 		case "Lava":
+			Debug.Log("Lava");
 			return Lava;
 		case "Water":
+			Debug.Log("Water");
 			return Water;
 		default:
 			return Lava;

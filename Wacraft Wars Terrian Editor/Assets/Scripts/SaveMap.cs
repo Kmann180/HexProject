@@ -15,6 +15,7 @@ public class SaveMap : MonoBehaviour
 {
 	public ListManager HexList;
 	public HexTypeManager HexType;
+	public GameObject Button;
 
 	void Start()
 	{
