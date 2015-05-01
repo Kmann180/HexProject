@@ -7,6 +7,7 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 //tuple????
 
@@ -16,6 +17,7 @@ public class SaveMap : MonoBehaviour
 	public ListManager HexList;
 	public HexTypeManager HexType;
 	public GameObject Button;
+	public InputField SaveAsText;
 
 	void Start()
 	{
@@ -61,8 +63,13 @@ public class SaveMap : MonoBehaviour
 		XDocument XMLdoc = new XDocument (XMLdec, XMLRootNode);
 		AtlasXML = XMLdoc;
 
-		
-		AtlasXML.Save("Map1.xml");
+		if (SaveAsText.text != null) 
+		{
+			string eek = ".\\Maps\\" + SaveAsText.text + ".xml";
+			AtlasXML.Save(eek);
+		}
+
+		//AtlasXML.Save("Map1.xml");
 	}
 
 	public void LoadXML()
@@ -71,7 +78,7 @@ public class SaveMap : MonoBehaviour
 		DestroyAllObjects();
 
 		XmlDocument Doc = new XmlDocument ();
-		Doc.Load("Map1.xml");
+		Doc.Load(".\\Maps\\Map1.xml");
 		XmlNodeList nodes = Doc.DocumentElement.SelectNodes("Hex_Node");
 		foreach (XmlElement node in nodes) 
 		{
