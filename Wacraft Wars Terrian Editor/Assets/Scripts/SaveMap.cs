@@ -9,7 +9,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-//tuple????
 
 public class SaveMap : MonoBehaviour
 
@@ -21,6 +20,7 @@ public class SaveMap : MonoBehaviour
 
 	void Start()
 	{
+		XMLTesting();
 	}
 
 	void Update()
@@ -67,6 +67,7 @@ public class SaveMap : MonoBehaviour
 		{
 			string eek = ".\\Maps\\" + SaveAsText.text + ".xml";
 			AtlasXML.Save(eek);
+			AtlasXML.Remove();
 		}
 
 		//AtlasXML.Save("Map1.xml");
@@ -109,5 +110,30 @@ public class SaveMap : MonoBehaviour
 			Destroy(gameObjects[i]);
 		}
 	}
+	//------------------------------------------------------------------------------------------
 
+	private string		path;					// Holds the application path
+
+	void XMLTesting()
+	{
+		print("file manager initialized.");
+		
+		path = Application.dataPath;
+		
+		print("Path: " + path);
+
+		Debug.Log(checkDirectory("Shit"));
+	}
+
+	private bool checkDirectory(string directory)
+	{
+		if(Directory.Exists(path + "/" + directory))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
 }
