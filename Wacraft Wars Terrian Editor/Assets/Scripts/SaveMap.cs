@@ -67,7 +67,6 @@ public class SaveMap : MonoBehaviour
 		{
 			string eek = ".\\Maps\\" + SaveAsText.text + ".xml";
 			AtlasXML.Save(eek);
-			AtlasXML.Remove();
 		}
 
 		//AtlasXML.Save("Map1.xml");
@@ -116,19 +115,17 @@ public class SaveMap : MonoBehaviour
 
 	void XMLTesting()
 	{
-		print("file manager initialized.");
-		
-		path = Application.dataPath;
-		
-		print("Path: " + path);
-
-		Debug.Log(checkDirectory("Shit"));
+		path = Directory.GetCurrentDirectory () + "\\Maps\\";
+		Debug.Log(checkDirectory("shit.xml"));
 	}
 
-	private bool checkDirectory(string directory)
+	private bool checkDirectory(string XMLFile)
 	{
-		if(Directory.Exists(path + "/" + directory))
+		Debug.Log ("Looking for " + path + XMLFile);
+		if(File.Exists(Directory.GetCurrentDirectory () + "\\Maps\\" + XMLFile))
 		{
+			File.Delete(path + "/" + XMLFile);
+			Debug.Log("Deleting file.");
 			return true;
 		}
 		else
