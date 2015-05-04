@@ -18,9 +18,10 @@ public class SaveMap : MonoBehaviour
 	public GameObject Button;
 	public InputField SaveAsText;
 
+	private string path = Directory.GetCurrentDirectory () + "\\Maps\\";
+
 	void Start()
 	{
-		XMLTesting();
 	}
 
 	void Update()
@@ -109,28 +110,26 @@ public class SaveMap : MonoBehaviour
 			Destroy(gameObjects[i]);
 		}
 	}
-	//------------------------------------------------------------------------------------------
 
-	private string		path;					// Holds the application path
-
-	void XMLTesting()
+	private bool CheckDirectory(string XMLFile)
 	{
-		path = Directory.GetCurrentDirectory () + "\\Maps\\";
-		Debug.Log(checkDirectory("shit.xml"));
-	}
-
-	private bool checkDirectory(string XMLFile)
-	{
-		Debug.Log ("Looking for " + path + XMLFile);
 		if(File.Exists(Directory.GetCurrentDirectory () + "\\Maps\\" + XMLFile))
 		{
-			File.Delete(path + "/" + XMLFile);
-			Debug.Log("Deleting file.");
 			return true;
 		}
-		else
-		{
-			return false;
-		}	
+		return false;
 	}
+
+	void DeleteMap(string XMLFile)
+	{
+		if (CheckDirectory(XMLFile))
+		{
+			File.Delete(path + "/" + XMLFile);
+		}
+	}
+
+	//------------------------------------------------------------------------------------------
+
+
+
 }
