@@ -6,6 +6,7 @@ public class Deactivate : MonoBehaviour
 {
 	GameObject[] SButtons;
 	GameObject[] LButtons;
+	GameObject[] DButtons;
 
 	// Use this for initialization
 	void Start () 
@@ -20,6 +21,11 @@ public class Deactivate : MonoBehaviour
 		{
 			Lbutton.SetActive(false);
 		}
+		DButtons = GameObject.FindGameObjectsWithTag("Delete");
+		foreach (GameObject Dbutton in DButtons) 
+		{
+			Dbutton.SetActive(false);
+		}
 	}
 	
 	// Update is called once per frame
@@ -32,14 +38,15 @@ public class Deactivate : MonoBehaviour
 	{
 		foreach (GameObject Sbutton in SButtons) 
 		{
-			Sbutton.SetActive(true);
+			Sbutton.SetActive(!Sbutton.activeSelf);
+			Sbutton.GetComponentInChildren
 		}
 	}
 	public void ActivateLoad()
 	{
 		foreach (GameObject Lbutton in LButtons) 
 		{
-			Lbutton.SetActive(true);
+			Lbutton.SetActive(!Lbutton.activeSelf);
 		}
 	}
 	public void DeactivateSave()
@@ -54,6 +61,20 @@ public class Deactivate : MonoBehaviour
 		foreach (GameObject Lbutton in LButtons) 
 		{
 			Lbutton.SetActive(false);
+		}
+	}
+	public void ActivateDelete()
+	{
+		foreach (GameObject Dbutton in DButtons) 
+		{
+			Dbutton.SetActive(!Dbutton.activeSelf);
+		}
+	}
+	public void DeactivateDelete()
+	{
+		foreach (GameObject Dbutton in DButtons) 
+		{
+			Dbutton.SetActive(false);
 		}
 	}
 

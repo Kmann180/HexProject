@@ -130,6 +130,21 @@ public class SaveMap : MonoBehaviour
 
 	//------------------------------------------------------------------------------------------
 
+	/*
+	might need this
 
+	public static int score; // player's score
+	Text text; //refrence to the text component
+	void awake()
+	{
+		text = GetComponent<Text> ();
+		score = 0
+	}
+
+	update:
+	//set the displayed text to be the word "Score" followed by the score value.
+	text.text = "Score " + score;
+
+	 */
 
 }
