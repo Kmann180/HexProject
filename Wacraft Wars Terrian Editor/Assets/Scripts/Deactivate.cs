@@ -39,7 +39,6 @@ public class Deactivate : MonoBehaviour
 		foreach (GameObject Sbutton in SButtons) 
 		{
 			Sbutton.SetActive(!Sbutton.activeSelf);
-			Sbutton.GetComponentInChildren
 		}
 	}
 	public void ActivateLoad()

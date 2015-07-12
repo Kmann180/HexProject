@@ -22,6 +22,10 @@ public class HighlighterMovement : MonoBehaviour {
 	void Update () 
 	{
 		CPos = this.transform.position;
+		if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(0,0,0))))
+		{
+			transform.Translate(new Vector3(0,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(0,0,0))),0), Space.Self);
+		}
 		Move ();
 	}
 
