@@ -80,14 +80,6 @@ public class HighlighterMovement : MonoBehaviour {
 				transform.Translate(new Vector3(0,MoveDown(HexMath.WorldToGrid(CPos)),0), Space.Self);
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.R)) 
-		{
-				transform.Rotate(0,60,0, Space.Self);
-		}
-		if (Input.GetKeyDown (KeyCode.Tab)) 
-		{
-				transform.Rotate(0,-60,0, Space.Self);
-		}
 	}
 
 	float MoveDown(Vector3 NPos)
