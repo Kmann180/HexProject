@@ -42,7 +42,7 @@ public class CreateNewHex : MonoBehaviour
 				Debug.Log("Found object");
 				Destroy(hit.transform.gameObject);
 				Debug.Log("Destroid");
-				HexList.RemoveFromList(CPos - new Vector3 (0,-1,0));
+				HexList.RemoveFromList(CPos);
 				Debug.Log("Removed from list");
 			}
 
