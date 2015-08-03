@@ -38,7 +38,9 @@ public class Deactivate : MonoBehaviour
 	{
 		foreach (GameObject Sbutton in SButtons) 
 		{
+			Debug.Log("Activating Save buttons");
 			Sbutton.SetActive(!Sbutton.activeSelf);
+			Debug.Log("Activated Save buttons");
 		}
 	}
 	public void ActivateLoad()

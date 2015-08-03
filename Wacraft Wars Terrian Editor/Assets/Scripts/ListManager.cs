@@ -8,6 +8,7 @@ using System.Collections.Generic;
 public class ListManager : MonoBehaviour 
 {
 	
+	bool IsItTrue;	
 	public HexTypeManager HexType;
 
 	public List<HexStats> HexList = new List<HexStats> ();
@@ -52,26 +53,28 @@ public class ListManager : MonoBehaviour
 		HexList.Add (Hex);
 	}
 
-	public void RemoveFromList (Vector3 Pos)
-	{
-		Vector3 OneDownPos = Pos - new Vector3 (0,1,0);
-		Vector3 HalfDownPos = Pos - new Vector3 (0,.5f,0);
-		
+	public void RemoveFromList (HexStats hs/*Vector3 Pos*/)
+	{		
+		HexList.Remove (hs);
+		/*
 		for (int i = 0; i < HexList.Count; i++)
 		{
-			if (HexList[i].PosXYZ == OneDownPos)
+			if(Physics.CheckSphere(Pos,0.001f))
 			{
+				Debug.Log("checking if in list?");
 				HexList.RemoveAt(i);
-				Debug.Log("Pos To Be Checked");
-				Debug.Log(OneDownPos);
+				Debug.Log("REMOVE FROM LIST: ");
+				Debug.Log(Pos);
+
 			}
-			if (HexList[i].PosXYZ == HalfDownPos)
+/*			if (HexList[i].GetComponent<MeshCollider>().bounds.Contains(Pos))
 			{
+				Debug.Log("checking if in list?");
 				HexList.RemoveAt(i);
-				Debug.Log("Pos To Be Checked (.5)");
-				Debug.Log(HalfDownPos);
-			}
-		}
+				Debug.Log("REMOVE FROM LIST: ");
+				Debug.Log(Pos);
+			}*/
+		//}
 		
 	}
 	public bool CheckListIn (Vector3 NewPos)
@@ -79,25 +82,22 @@ public class ListManager : MonoBehaviour
 		//hex that you are moving to
 		Vector3 OneDownPos = NewPos;
 		Vector3 HalfDownPos = NewPos - new Vector3 (0,.5f,0); 							///Change///
+
 		
-		bool IsItTrue = false;
+		IsItTrue = false;
 		
 		for (int i = 0; i < HexList.Count; i++) 
 		{
 			if (HexList [i].PosXYZ == OneDownPos) 
 			{
 				IsItTrue = true;
-				Debug.Log("Tile Pos");
 				Debug.Log(HexList[i].PosXYZ);
-				Debug.Log("Pos To Be Checked");
 				Debug.Log(OneDownPos);
 			} 
 			if (HexList [i].PosXYZ == HalfDownPos) 
 			{
 				IsItTrue = true;
-				Debug.Log("Tile Pos (.5)");
 				Debug.Log(HexList[i].PosXYZ);
-				Debug.Log("Pos To Be Checked (.5)");
 				Debug.Log(HalfDownPos);
 			}
 		}

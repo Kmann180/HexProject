@@ -26,11 +26,13 @@ public class SaveMap : MonoBehaviour
 
 	void Update()
 	{
+		/*
 		if (Input.GetKeyDown (KeyCode.L)) 
 		{
 			LoadXML ();
 			Debug.Log ("Loaded!");
 		}
+		*/
 		if (Input.GetKeyDown (KeyCode.Return)) 
 		{
 			GenXML();

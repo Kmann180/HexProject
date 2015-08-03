@@ -33,17 +33,57 @@ public class CreateNewHex : MonoBehaviour
 			HexList.HexList.Add(stats);
 			transform.Translate(new Vector3(0,1,0), Space.Self);
 		}
+		
+		if (Input.GetKeyDown (KeyCode.Keypad3)) 
+		{
+			var stats = ((Instantiate(HexType.PickType("Grass"), CPos, new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+			HexList.HexList.Add(stats);
+			transform.Translate(new Vector3(0,1,0), Space.Self);
+		}
+		
+		if (Input.GetKeyDown (KeyCode.Keypad4)) 
+		{
+			var stats = ((Instantiate(HexType.PickType("Leaf"), CPos, new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+			HexList.HexList.Add(stats);
+			transform.Translate(new Vector3(0,1,0), Space.Self);
+		}
+		
+		if (Input.GetKeyDown (KeyCode.Keypad5)) 
+		{
+			var stats = ((Instantiate(HexType.PickType("Sand"), CPos, new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+			HexList.HexList.Add(stats);
+			transform.Translate(new Vector3(0,1,0), Space.Self);
+		}
+		
+		if (Input.GetKeyDown (KeyCode.Keypad6)) 
+		{
+			var stats = ((Instantiate(HexType.PickType("Stone"), CPos, new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+			HexList.HexList.Add(stats);
+			transform.Translate(new Vector3(0,1,0), Space.Self);
+		}
+		
+		if (Input.GetKeyDown (KeyCode.Keypad7)) 
+		{
+			var stats = ((Instantiate(HexType.PickType("Trunk"), CPos, new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+			HexList.HexList.Add(stats);
+			transform.Translate(new Vector3(0,1,0), Space.Self);
+		}
+		
+		if (Input.GetKeyDown (KeyCode.Keypad8)) 
+		{
+			var stats = ((Instantiate(HexType.PickType("Wood"), CPos, new Quaternion(0,0,0,0))) as GameObject).GetComponent<HexStats>();
+			HexList.HexList.Add(stats);
+			transform.Translate(new Vector3(0,1,0), Space.Self);
+		}
 		if (Input.GetKeyDown (KeyCode.Delete)) 
 		{
 			Debug.Log("Delete was hit");
 			CPos = CPos - new Vector3 (0,-1,0);
 			if (Physics.Raycast(CPos, new Vector3(0,-1,0), out hit))
 			{
-				Debug.Log("Found object");
+				HexList.RemoveFromList(hit.transform.gameObject.GetComponent<HexStats>());
 				Destroy(hit.transform.gameObject);
 				Debug.Log("Destroid");
-				HexList.RemoveFromList(CPos);
-				Debug.Log("Removed from list");
 			}
 
 		}

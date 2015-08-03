@@ -6,8 +6,12 @@ public class HexTypeManager : MonoBehaviour
 	
 	public GameObject Lava;
 	public GameObject Water;
-	//public GameObject Grass;
-	//public GameObject Stone;
+	public GameObject Grass;
+	public GameObject Stone;	
+	public GameObject Sand;
+	public GameObject Leaf;
+	public GameObject Wood;
+	public GameObject Trunk;
 	//public GameObject Snow;
 	//public GameObject Swamp;
 	//public GameObject Brick;
@@ -35,6 +39,24 @@ public class HexTypeManager : MonoBehaviour
 		case "Water":
 			Debug.Log("Water");
 			return Water;
+		case "Grass":
+			Debug.Log("Grass");
+			return Grass;
+		case "Stone":
+			Debug.Log("Stone");
+			return Stone;
+		case "Leaf":
+			Debug.Log("Leaf");
+			return Leaf;
+		case "Sand":
+			Debug.Log("Sand");
+			return Sand;
+		case "Trunk":
+			Debug.Log("Trunk");
+			return Trunk;
+		case "Wood":
+			Debug.Log("Wood");
+			return Wood;
 		default:
 			return Lava;
 		}
