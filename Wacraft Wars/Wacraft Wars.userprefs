@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HighlighterMovement.cs">
     <Files>
-      <File FileName="Assets\Scripts\HighlighterMovement.cs" Line="12" Column="31" />
+      <File FileName="Assets\Scripts\HighlighterMovement.cs" Line="92" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -16,13 +16,21 @@ public class CameraMovement : MonoBehaviour
 	{
 		HPos = HighLHex.transform.position;
 
-		if (Input.GetKeyDown (KeyCode.R)) 
+		if (Input.GetKeyDown (KeyCode.RightArrow)) 
 		{
 			transform.RotateAround(HPos, Vector3.up, 60);
 		}
-		if (Input.GetKeyDown (KeyCode.Tab)) 
+		if (Input.GetKeyDown (KeyCode.LeftArrow)) 
 		{
 			transform.RotateAround(HPos, Vector3.down, 60);
+		}
+		if (Input.GetKeyDown (KeyCode.UpArrow)) 
+		{
+			transform.RotateAround(HPos, Vector3.right, 10);
+		}
+		if (Input.GetKeyDown (KeyCode.DownArrow)) 
+		{
+			transform.RotateAround(HPos, Vector3.left, 10);
 		}
 	}
 }
