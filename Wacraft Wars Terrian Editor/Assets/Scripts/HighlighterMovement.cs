@@ -6,6 +6,7 @@ public class HighlighterMovement : MonoBehaviour {
 	//Scripts
 	public ListManager HexList;
 	public HexStats HexMath;
+	int iRotation = 0;
 
 	//Current Position of highlighter
 	public Vector3 CPos;
@@ -26,70 +27,279 @@ public class HighlighterMovement : MonoBehaviour {
 		{
 			transform.Translate(new Vector3(0,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(0,0,0))),0), Space.Self);
 		}
-		Move ();
+		Rotation ();
+		Move0 ();
+		Move1 ();
+		Move2 ();
+		Move3 ();
+		Move4 ();
+		Move5 ();
 	}
-
-	void Move()
+	void Rotation()
 	{
-		if (Input.GetKeyDown (KeyCode.A)) 
+		if (Input.GetKeyDown (KeyCode.RightArrow)) 
 		{
-			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(-3,0,-1.73f))))
+			iRotation++;
+			if (iRotation == 6)
 			{
-				transform.Translate(new Vector3(-3,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(-3,0,-1.73f))),-1.73f), Space.Self);
+				iRotation = 0;
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.Q)) 
+		if (Input.GetKeyDown (KeyCode.LeftArrow)) 
 		{
-			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(-3,0,1.73f))))
+			iRotation--;
+			if (iRotation == -1)
 			{
-				transform.Translate(new Vector3(-3,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(-3,0,1.73f))),1.73f) , Space.Self);
+				iRotation = 5;
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.W)) 
-		{
-			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(0,0,3.46f))))
-			{
-				transform.Translate(new Vector3(0,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(0,0,3.46f))),3.46f), Space.Self);
+		
+	}
+	void Move0()
+	{
+		if (iRotation == 0) {
+			if (Input.GetKeyDown (KeyCode.A)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f))), -1.73f), Space.Self);
+				}
 			}
-		}
-		if (Input.GetKeyDown (KeyCode.E)) 
-		{
-			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(3,0,1.73f))))
-			{
-				transform.Translate(new Vector3(3,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(3,0,1.73f))),1.73f), Space.Self);
+			if (Input.GetKeyDown (KeyCode.Q)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f))), 1.73f), Space.Self);
+				}
 			}
-		}
-		if (Input.GetKeyDown (KeyCode.D)) 
-		{
-			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(3,0,-1.73f))))
-			{
-				transform.Translate(new Vector3(3,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(3,0,-1.73f))),-1.73f), Space.Self);
+			if (Input.GetKeyDown (KeyCode.W)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f))), 3.46f), Space.Self);
+				}
 			}
-		}
-		if (Input.GetKeyDown (KeyCode.S)) 
-		{
-			if (MoveCheckBool(HexMath.WorldToGrid(CPos + new Vector3(0,0,-3.46f))))
-			{
-				transform.Translate(new Vector3(0,MoveCheckFloat(HexMath.WorldToGrid(CPos + new Vector3(0,0,-3.46f))),-3.46f), Space.Self);
+			if (Input.GetKeyDown (KeyCode.E)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f))), 1.73f), Space.Self);
+				}
 			}
-		}
-		if (Input.GetKeyDown (KeyCode.Space)) 
-		{
-			if (MoveCheckBool(HexMath.WorldToGrid(CPos)))
-			{
-				transform.Translate(new Vector3(0,MoveDown(HexMath.WorldToGrid(CPos)),0), Space.Self);
+			if (Input.GetKeyDown (KeyCode.D)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f))), -1.73f), Space.Self);
+				}
 			}
-		}
-		if (Input.GetKeyDown (KeyCode.R)) 
-		{
-				transform.Rotate(0,60,0, Space.Self);
-		}
-		if (Input.GetKeyDown (KeyCode.Tab)) 
-		{
-				transform.Rotate(0,-60,0, Space.Self);
+			if (Input.GetKeyDown (KeyCode.S)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f))), -3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos))) {
+					transform.Translate (new Vector3 (0, MoveDown (HexMath.WorldToGrid (CPos)), 0), Space.Self);
+				}
+			}
 		}
 	}
-
+	void Move1()
+	{
+		if (iRotation == 1) {
+			if (Input.GetKeyDown (KeyCode.A)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f))), 1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Q)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f))), 3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.W)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f))), 1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.E)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f))), -1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.D)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f))), -3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.S)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f))), -1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos))) {
+					transform.Translate (new Vector3 (0, MoveDown (HexMath.WorldToGrid (CPos)), 0), Space.Self);
+				}
+			}
+			
+		}
+	}
+	void Move2()
+	{
+		if (iRotation == 2) {
+			if (Input.GetKeyDown (KeyCode.A)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f))), 3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Q)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f))), 1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.W)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f))), -1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.E)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f))), -3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.D)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f))), -1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.S)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f))), 1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos))) {
+					transform.Translate (new Vector3 (0, MoveDown (HexMath.WorldToGrid (CPos)), 0), Space.Self);
+				}
+			}
+			
+		}
+	}
+	void Move3()
+	{
+		if (iRotation == 3) {
+			if (Input.GetKeyDown (KeyCode.A)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f))), 1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Q)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f))), -1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.W)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f))), -3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.E)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f))), -1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.D)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f))), 1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.S)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f))), 3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos))) {
+					transform.Translate (new Vector3 (0, MoveDown (HexMath.WorldToGrid (CPos)), 0), Space.Self);
+				}
+			}
+			
+		}
+	}
+	void Move4()
+	{
+		if (iRotation == 4) {
+			if (Input.GetKeyDown (KeyCode.A)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f))), -1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Q)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f))), -3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.W)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f))), -1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.E)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f))), 1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.D)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f))), 3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.S)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f))), 1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos))) {
+					transform.Translate (new Vector3 (0, MoveDown (HexMath.WorldToGrid (CPos)), 0), Space.Self);
+				}
+			}
+			
+		}
+	}
+	void Move5()
+	{
+		if (iRotation == 5) {
+			if (Input.GetKeyDown (KeyCode.A)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, -3.46f))), -3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Q)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, -1.73f))), -1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.W)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (-3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (-3, 0, 1.73f))), 1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.E)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f)))) {
+					transform.Translate (new Vector3 (0, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (0, 0, 3.46f))), 3.46f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.D)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, 1.73f))), 1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.S)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f)))) {
+					transform.Translate (new Vector3 (3, MoveCheckFloat (HexMath.WorldToGrid (CPos + new Vector3 (3, 0, -1.73f))), -1.73f), Space.Self);
+				}
+			}
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				if (MoveCheckBool (HexMath.WorldToGrid (CPos))) {
+					transform.Translate (new Vector3 (0, MoveDown (HexMath.WorldToGrid (CPos)), 0), Space.Self);
+				}
+			}
+			
+		}
+	}
 	float MoveDown(Vector3 NPos)
 	{
 		float i = NPos.y;

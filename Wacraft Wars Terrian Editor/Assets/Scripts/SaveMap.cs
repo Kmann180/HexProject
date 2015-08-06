@@ -17,6 +17,7 @@ public class SaveMap : MonoBehaviour
 	public HexTypeManager HexType;
 	public GameObject Button;
 	public InputField SaveAsText;
+	public InputField LoadMapText;
 
 	private string path = Directory.GetCurrentDirectory () + "\\Maps\\";
 
@@ -32,12 +33,13 @@ public class SaveMap : MonoBehaviour
 			LoadXML ();
 			Debug.Log ("Loaded!");
 		}
-		*/
+
 		if (Input.GetKeyDown (KeyCode.Return)) 
 		{
 			GenXML();
 			Debug.Log("Saved!");
 		}
+		*/
 	}
 
 		public System.Xml.Linq.XDocument AtlasXML;
@@ -75,7 +77,7 @@ public class SaveMap : MonoBehaviour
 		//AtlasXML.Save("Map1.xml");
 	}
 
-	public void LoadXML()
+	public void LoadDefualtXML()
 	{
 		HexList.HexList.Clear();
 		DestroyAllObjects();
@@ -93,6 +95,27 @@ public class SaveMap : MonoBehaviour
 			HexList.AddToList(GridToWorld(new Vector3(x,y,z)), Type);
 		}
 
+	}
+
+	public void LoadXML()
+	{
+		HexList.HexList.Clear();
+		DestroyAllObjects();
+		
+		XmlDocument Doc = new XmlDocument ();
+		Doc.Load(".\\Maps\\" + LoadMapText.text + ".xml");
+		XmlNodeList nodes = Doc.DocumentElement.SelectNodes("Hex_Node");
+		foreach (XmlElement node in nodes) 
+		{
+			float x = Convert.ToSingle(node.GetAttribute("x"));
+			float y = Convert.ToSingle(node.GetAttribute("y"));
+			float z = Convert.ToSingle(node.GetAttribute("z"));
+			string Type = node.GetAttribute("Type");
+			
+			HexList.AddToList(GridToWorld(new Vector3(x,y,z)), Type);
+		}
+		LoadMapText.text.Remove (0);
+		
 	}
 
 	public Vector3 GridToWorld(Vector3 GPos)

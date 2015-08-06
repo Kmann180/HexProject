@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HighlighterMovement.cs">
     <Files>
-      <File FileName="Assets\Scripts\HighlighterMovement.cs" Line="92" Column="19" />
+      <File FileName="..\Wacraft Wars Terrian Editor\Assets\Scripts\HighlighterMovement.cs" Line="299" Column="5" />
+      <File FileName="Assets\Scripts\HighlighterMovement.cs" Line="10" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
