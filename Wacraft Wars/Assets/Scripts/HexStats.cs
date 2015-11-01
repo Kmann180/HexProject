@@ -20,6 +20,9 @@ public class HexStats : MonoBehaviour {
 	// Grid Vector3
 	public Vector3 PosXYZ;
 
+    //amount of space between this Hex and the one on top of it.
+    public Vector3 SpaceAbove;
+
 	void Start()
 	{
 		//Grid Maths
@@ -28,6 +31,7 @@ public class HexStats : MonoBehaviour {
 		PosZ = Mathf.Round((transform.position.z + ((transform.position.x / SnapX) * (SnapZ))) / (SnapZ * 2));
 		PosXYZ = new Vector3 (PosX, PosY, PosZ);
 	}
+
 	public Vector3 WorldToGrid(Vector3 WPos)
 	{
 		PosX = Mathf.RoundToInt(WPos.x / SnapX);
