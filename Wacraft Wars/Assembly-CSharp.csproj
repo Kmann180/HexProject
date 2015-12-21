@@ -50,6 +50,7 @@
      <Compile Include="Assets\ProCore\ProBuilder\API Examples\Runtime Editing\RuntimeEdit.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\CharacterList.cs" />
+     <Compile Include="Assets\Scripts\CharacterStats.cs" />
      <Compile Include="Assets\Scripts\HexStats.cs" />
      <Compile Include="Assets\Scripts\HexTypeManager.cs" />
      <Compile Include="Assets\Scripts\HighlighterMovement.cs" />

@@ -20,12 +20,12 @@ public class CharacterList : MonoBehaviour
     {
     }
 
-    void StartList(GameObject[] Hex)
+    void StartList(GameObject[] Haro)
     {
-        for (int i = 0; i < Hex.Length; i++)
+        for (int i = 0; i < Hero.Length; i++)
         {
-            GameObject hex = Hex[i];
-            HexStats GridHex = hex.GetComponent<HexStats>();
+            GameObject Char = Hero[i];
+            HexStats GridHex = hero.GetComponent<HeroStats>();
 
             CharList.Add(GridHex);
         }
